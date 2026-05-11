@@ -1,0 +1,42 @@
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+.content-area {
+  flex: 1;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.content-area.expanded {
+  margin-left: 260px;
+}
+
+.content-area.collapsed {
+  margin-left: 80px;
+}
+
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .content-area.expanded,
+  .content-area.collapsed {
+    margin-left: 0;
+    padding: 20px;
+  }
+  
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+    width: 260px;
+  }
+}
