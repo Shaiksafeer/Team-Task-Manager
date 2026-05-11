@@ -20,7 +20,8 @@ spring:
 jwt:
   secret: ${JWT_SECRET}
   expiration: 3600000 # 24 hours
-
+frontend:
+  url: ${FRONTEND_URL}
 logging:
   level:
     org.springframework.security: DEBUG
