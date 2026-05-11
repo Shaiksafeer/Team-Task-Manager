@@ -6,6 +6,7 @@ D:\Team-Task-Manager\backend\src\main\java\com\teammanager\controller\BaseContro
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\controller\DashboardController.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\controller\ProjectController.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\controller\TaskController.java
+D:\Team-Task-Manager\backend\src\main\java\com\teammanager\controller\UserController.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\dto\AdminDashboardResponse.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\dto\ApiResponse.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\dto\AuthResponse.java
@@ -42,5 +43,7 @@ D:\Team-Task-Manager\backend\src\main\java\com\teammanager\service\ProjectServic
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\service\ProjectServiceImpl.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\service\TaskService.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\service\TaskServiceImpl.java
+D:\Team-Task-Manager\backend\src\main\java\com\teammanager\service\UserService.java
+D:\Team-Task-Manager\backend\src\main\java\com\teammanager\service\UserServiceImpl.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\TeamTaskManagerApplication.java
 D:\Team-Task-Manager\backend\src\main\java\com\teammanager\util\Constants.java

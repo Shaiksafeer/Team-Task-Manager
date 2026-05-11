@@ -92,6 +92,7 @@ const Projects = () => {
   if (loading) return <Loader />;
 
   return (
+    <>
     <div className="projects-container fade-in">
       <header className="page-header">
         <div className="header-info">
@@ -168,9 +169,10 @@ const Projects = () => {
           </div>
         )}
       </div>
+    </div>
 
-      {/* Create Project Modal */}
-      {showModal && (
+    {/* Create Project Modal */}
+    {showModal && (
         <div className="modal-overlay">
           <div className="modal-content glass-panel">
             <div className="modal-header">
@@ -197,7 +199,6 @@ const Projects = () => {
                   value={newProject.description}
                   onChange={(e) => setNewProject({...newProject, description: e.target.value})}
                   placeholder="What is this project about?"
-                  className="modal-textarea"
                 ></textarea>
               </div>
               <button type="submit" className="submit-btn" disabled={submitting}>
@@ -247,7 +248,7 @@ const Projects = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

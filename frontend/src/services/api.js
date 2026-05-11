@@ -1,9 +1,9 @@
 import axios from 'axios';
-const BACKEND_URL = process.env.REACT_APP_API_URL;
+const BACKEND_URL = import.meta.env.VITE_API_URL;
 
 if (!BACKEND_URL) {
-  console.error('REACT_APP_API_URL is not defined! Please check your .env file.');
-  throw new Error('REACT_APP_API_URL is missing. The application cannot connect to the backend.');
+  console.error('VITE_API_URL is not defined! Please check your .env file.');
+  throw new Error('VITE_API_URL is missing. The application cannot connect to the backend.');
 }
 
 console.log('Backend URL:', BACKEND_URL);

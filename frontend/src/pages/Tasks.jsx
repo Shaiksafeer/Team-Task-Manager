@@ -121,6 +121,7 @@ const Tasks = () => {
   if (loading) return <Loader />;
 
   return (
+    <>
     <div className="tasks-container fade-in">
       <header className="page-header">
         <div className="header-info">
@@ -209,8 +210,9 @@ const Tasks = () => {
           </tbody>
         </table>
       </div>
+    </div>
 
-      {showModal && (
+    {showModal && (
         <div className="modal-overlay">
           <div className="modal-content glass-panel">
             <div className="modal-header">
@@ -231,7 +233,7 @@ const Tasks = () => {
                 />
               </div>
               
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="form-row">
                 <div className="form-group">
                   <label>Project</label>
                   <select 
@@ -258,7 +260,7 @@ const Tasks = () => {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="form-row">
                 <div className="form-group">
                   <label>Priority</label>
                   <select 
@@ -288,14 +290,6 @@ const Tasks = () => {
                   value={newTask.description}
                   onChange={(e) => setNewTask({...newTask, description: e.target.value})}
                   placeholder="Additional details..."
-                  style={{ 
-                    background: 'rgba(255, 255, 255, 0.05)', 
-                    border: '1px solid var(--glass-border)',
-                    borderRadius: '12px',
-                    padding: '12px 16px',
-                    color: 'white',
-                    resize: 'none'
-                  }}
                 ></textarea>
               </div>
 
@@ -306,7 +300,7 @@ const Tasks = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

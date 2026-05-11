@@ -8,6 +8,7 @@ const Signup = () => {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     role: 'MEMBER'
   });
   const [errors, setErrors] = useState({});
@@ -29,6 +30,9 @@ const Signup = () => {
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -49,7 +53,8 @@ const Signup = () => {
     setLoading(true);
     setApiError('');
     try {
-      await signup(formData);
+      const { confirmPassword, ...signupData } = formData;
+      await signup(signupData);
       navigate('/login', { state: { message: 'Registration successful! Please login.' } });
     } catch (err) {
       const message = err.response?.data?.message || 'Registration failed. Try again.';
@@ -104,6 +109,18 @@ const Signup = () => {
               placeholder="••••••••"
             />
             {errors.password && <span className="error-text">{errors.password}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="••••••••"
+            />
+            {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
           </div>
 
           <div className="form-group">

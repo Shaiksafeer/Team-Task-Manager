@@ -3,11 +3,14 @@ com\teammanager\entity\ProjectMember.class
 com\teammanager\entity\User.class
 com\teammanager\security\CustomUserDetailsService.class
 com\teammanager\dto\SignupRequest.class
+com\teammanager\controller\UserController.class
+com\teammanager\service\UserServiceImpl.class
 com\teammanager\entity\ProjectMember$ProjectMemberBuilder.class
 com\teammanager\dto\MemberDashboardResponse$MemberDashboardResponseBuilder.class
 com\teammanager\service\TaskService.class
 com\teammanager\enums\TaskPriority.class
 com\teammanager\enums\Role.class
+com\teammanager\service\UserService.class
 com\teammanager\entity\Project$ProjectBuilder.class
 com\teammanager\dto\LoginRequest$LoginRequestBuilder.class
 com\teammanager\repository\TaskRepository.class
