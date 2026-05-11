@@ -40,3 +40,13 @@ logging:
   level:
     org.springframework.security: DEBUG
     com.teammanager: DEBUG
+    root: ERROR
+    org.springframework.web: DEBUG
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+
+
+
