@@ -61,7 +61,7 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("https://team-task-manager-production-8496.up.railway.app"));
+        configuration.setAllowedOrigins(List.of("https://team-task-manager-f895ujkql-shaiksafeers-projects.vercel.app"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
