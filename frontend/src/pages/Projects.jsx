@@ -24,6 +24,8 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [newProject, setNewProject] = useState({ name: '', description: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [deletingProject, setDeletingProject] = useState(null);
+  const [addingMember, setAddingMember] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -32,7 +34,8 @@ const Projects = () => {
     }
   }, []);
 
-  const fetchProjects = async () => {
+  const fetchProjects = async (showLoader = true) => {
+    if (showLoader) setLoading(true);
     try {
       const data = await projectService.getAllProjects();
       setProjects(data);
@@ -57,11 +60,12 @@ const Projects = () => {
     setSubmitting(true);
     try {
       await projectService.createProject(newProject);
-      setShowModal(false);
       setNewProject({ name: '', description: '' });
-      fetchProjects();
+      setShowModal(false);
+      await fetchProjects(false);
     } catch (err) {
       console.error('Failed to create project');
+      alert('Failed to create project. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -69,23 +73,30 @@ const Projects = () => {
 
   const handleDeleteProject = async (id) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
+      setDeletingProject(id);
       try {
         await projectService.deleteProject(id);
-        fetchProjects();
+        await fetchProjects(false);
       } catch (err) {
         console.error('Failed to delete project');
+        alert('Failed to delete project. Please try again.');
+      } finally {
+        setDeletingProject(null);
       }
     }
   };
 
   const handleAddMember = async (userId) => {
+    setAddingMember(true);
     try {
       await projectService.addMemberToProject(selectedProject.id, userId);
-      fetchProjects(); // Refresh project list to show new member
+      await fetchProjects(false); // Refresh project list to show new member
       setShowMemberModal(false);
       alert('Member added successfully!');
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to add member');
+    } finally {
+      setAddingMember(false);
     }
   };
 
@@ -110,7 +121,7 @@ const Projects = () => {
       <div className="projects-grid">
         {projects.length > 0 ? (
           projects.map(project => (
-            <div key={project.id} className="project-card glass-panel">
+            <div key={project.id} className={`project-card glass-panel ${deletingProject === project.id ? 'deleting' : ''}`}>
               <div className="project-title">
                 <div>
                   <h3>{project.name}</h3>
@@ -124,6 +135,7 @@ const Projects = () => {
                       setSelectedProject(project);
                       setShowMemberModal(true);
                     }}
+                    disabled={deletingProject === project.id}
                   >
                     <UserPlus size={18} />
                   </button>
@@ -153,8 +165,9 @@ const Projects = () => {
                       className="action-btn delete" 
                       title="Delete"
                       onClick={() => handleDeleteProject(project.id)}
+                      disabled={deletingProject === project.id}
                     >
-                      <Trash2 size={16} />
+                      {deletingProject === project.id ? '...' : <Trash2 size={16} />}
                     </button>
                   </div>
                 )}
@@ -177,7 +190,7 @@ const Projects = () => {
           <div className="modal-content glass-panel">
             <div className="modal-header">
               <h2>Create New Project</h2>
-              <button onClick={() => setShowModal(false)} className="action-btn">
+              <button onClick={() => setShowModal(false)} className="action-btn" disabled={submitting}>
                 <X size={20} />
               </button>
             </div>
@@ -190,6 +203,7 @@ const Projects = () => {
                   onChange={(e) => setNewProject({...newProject, name: e.target.value})}
                   placeholder="Enter project name"
                   required
+                  disabled={submitting}
                 />
               </div>
               <div className="form-group">
@@ -199,6 +213,7 @@ const Projects = () => {
                   value={newProject.description}
                   onChange={(e) => setNewProject({...newProject, description: e.target.value})}
                   placeholder="What is this project about?"
+                  disabled={submitting}
                 ></textarea>
               </div>
               <button type="submit" className="submit-btn" disabled={submitting}>
@@ -215,7 +230,7 @@ const Projects = () => {
           <div className="modal-content glass-panel" style={{ maxWidth: '400px' }}>
             <div className="modal-header">
               <h2>Add Member</h2>
-              <button onClick={() => setShowMemberModal(false)} className="action-btn">
+              <button onClick={() => setShowMemberModal(false)} className="action-btn" disabled={addingMember}>
                 <X size={20} />
               </button>
             </div>
@@ -236,8 +251,9 @@ const Projects = () => {
                         className="action-btn" 
                         onClick={() => handleAddMember(userItem.id)}
                         style={{ background: 'var(--primary)', color: 'white' }}
+                        disabled={addingMember}
                       >
-                        <Plus size={16} />
+                        {addingMember ? '...' : <Plus size={16} />}
                       </button>
                     </div>
                   ))

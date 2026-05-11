@@ -16,14 +16,24 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (credentials) => {
-    const data = await authService.login(credentials);
-    setUser(data);
-    return data;
+    try {
+      const data = await authService.login(credentials);
+      setUser(data);
+      return data;
+    } catch (error) {
+      console.error('Login error in AuthContext:', error);
+      throw error;
+    }
   };
 
   const signup = async (userData) => {
-    const data = await authService.signup(userData);
-    return data;
+    try {
+      const data = await authService.signup(userData);
+      return data;
+    } catch (error) {
+      console.error('Signup error in AuthContext:', error);
+      throw error;
+    }
   };
 
   const logout = () => {

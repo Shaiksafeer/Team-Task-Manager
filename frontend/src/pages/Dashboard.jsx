@@ -20,20 +20,25 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchDashboardData = async () => {
+      setLoading(true);
+      setError('');
       try {
-        let dashboardData;
-        if (user.role === 'ADMIN') {
-          dashboardData = await dashboardService.getAdminDashboard();
-        } else {
-          dashboardData = await dashboardService.getMemberDashboard();
-        }
-        setData(dashboardData);
+        const dashboardPromise = user.role === 'ADMIN' 
+          ? dashboardService.getAdminDashboard() 
+          : dashboardService.getMemberDashboard();
+        
+        const overduePromise = dashboardService.getOverdueTasks();
 
-        const overdue = await dashboardService.getOverdueTasks();
+        const [dashboardData, overdue] = await Promise.all([
+          dashboardPromise,
+          overduePromise
+        ]);
+
+        setData(dashboardData);
         setOverdueTasks(overdue);
       } catch (err) {
         console.error('Dashboard fetch error:', err);
-        setError('Failed to load dashboard data.');
+        setError('Failed to load dashboard data. Please refresh the page.');
       } finally {
         setLoading(false);
       }
