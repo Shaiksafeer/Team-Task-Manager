@@ -39,12 +39,12 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private Role role;
 
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Builder.Default
     @JsonIgnore
     private List<Project> createdProjects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Builder.Default
     @JsonIgnore
     private List<ProjectMember> projectMemberships = new ArrayList<>();

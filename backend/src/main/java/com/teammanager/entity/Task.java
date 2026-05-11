@@ -37,11 +37,11 @@ public class Task extends BaseEntity {
 
     private LocalDateTime dueDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assigned_to_id")
     private User assignedTo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id", nullable = false)
     @JsonIgnore
     private Project project;

@@ -25,15 +25,15 @@ public class Project extends BaseEntity {
     @Size(max = 500)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_by_id", nullable = false)
     private User createdBy;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Builder.Default
     private List<Task> tasks = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Builder.Default
     private List<ProjectMember> members = new ArrayList<>();
 }

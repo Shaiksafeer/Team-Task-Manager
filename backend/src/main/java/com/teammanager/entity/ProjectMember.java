@@ -13,12 +13,12 @@ import lombok.*;
 @Builder
 public class ProjectMember extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id", nullable = false)
     @JsonIgnore
     private Project project;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
