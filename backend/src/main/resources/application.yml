@@ -8,6 +8,8 @@ spring:
     password: ${DATABASE_PASS}
     driver-class-name: org.postgresql.Driver
     hikari:
+      data-source-properties:
+        prepareThreshold: 0
       maximum-pool-size: 5
       minimum-idle: 1
       idle-timeout: 30000
@@ -19,7 +21,6 @@ spring:
 
   jpa:
     open-in-view: false
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
