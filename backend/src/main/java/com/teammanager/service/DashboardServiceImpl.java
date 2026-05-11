@@ -14,6 +14,7 @@ import com.teammanager.repository.TaskRepository;
 import com.teammanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -30,6 +31,7 @@ public class DashboardServiceImpl implements DashboardService {
     private final ProjectMemberRepository projectMemberRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public AdminDashboardResponse getAdminDashboard() {
         List<TaskStatus> pendingStatuses = Arrays.asList(TaskStatus.TODO, TaskStatus.IN_PROGRESS);
         
@@ -44,6 +46,7 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MemberDashboardResponse getMemberDashboard(String currentUserEmail) {
         User user = userRepository.findByEmail(currentUserEmail)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -60,6 +63,7 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<TaskResponse> getOverdueTasks(String currentUserEmail) {
         User user = userRepository.findByEmail(currentUserEmail)
                 .orElseThrow(() -> new RuntimeException("User not found"));
