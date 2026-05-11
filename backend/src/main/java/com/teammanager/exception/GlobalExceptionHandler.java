@@ -12,14 +12,14 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<String>> handleGeneralException(Exception ex) {
-        ApiResponse<String> response = ApiResponse.<String>builder()
-                .success(false)
-                .message(ex.getMessage())
-                .build();
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ApiResponse<String>> handleGeneralException(Exception ex) {
+//        ApiResponse<String> response = ApiResponse.<String>builder()
+//                .success(false)
+//                .message(ex.getMessage())
+//                .build();
+//        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleException(Exception ex) {
 
